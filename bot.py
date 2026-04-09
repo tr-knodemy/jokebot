@@ -7,18 +7,12 @@ TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True  # Needed for welcome event
+intents.members = True  
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# -------------------------
-# Safety Filter (Bad Words)
-# -------------------------
-banned_words = ["badword1", "badword2", "badword3"]  # customize this list
+banned_words = ["badword1", "badword2", "badword3"]  
 
-# -------------------------
-# Dad jokes
-# -------------------------
 dad_jokes = [
     "I'm reading a book about anti-gravity. It's impossible to put down!",
     "I used to hate facial hair... but then it grew on me.",
@@ -27,9 +21,7 @@ dad_jokes = [
     "Did you hear about the restaurant on the moon? Great food, no atmosphere."
 ]
 
-# -------------------------
-# Roasts (lighthearted)
-# -------------------------
+
 roasts = [
     "I'd agree with you, but then we'd both be wrong.",
     "You're not stupid, you just have bad luck thinking.",
@@ -38,9 +30,7 @@ roasts = [
     "You're like a cloud—when you disappear, it's a beautiful day."
 ]
 
-# -------------------------
-# Puns
-# -------------------------
+
 puns = [
     "I used to be a baker, but I couldn't make enough dough.",
     "I’m on a seafood diet. I see food and I eat it.",
@@ -49,20 +39,16 @@ puns = [
     "I used to play piano by ear, now I use my hands."
 ]
 
-# -------------------------
-# Events
-# -------------------------
 
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
 
-# Welcome event
 @bot.event
 async def on_member_join(member):
-    channel = member.guild.system_channel  # default system channel
+    channel = member.guild.system_channel  
     if channel:
-        await channel.send(f"🎉 Welcome to the server, {member.mention}! Enjoy your stay!")
+        await channel.send(f" Welcome to the server, {member.mention}!")
 
 # Safety filter
 @bot.event
@@ -74,7 +60,7 @@ async def on_message(message):
         if word in message.content.lower():
             await message.delete()
             await message.channel.send(
-                f"⚠️ {message.author.mention}, please keep it clean!"
+                f" {message.author.mention}, please keep it clean!"
             )
             return
 
